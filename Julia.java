@@ -14,9 +14,12 @@ public class Julia extends JFrame{    //inherit JFrame
     */
     static final int WIDTH=800;
     static final int HEIGHT=800;
-
+    
+    public double c_r;
+    public double c_i;
+    
     //may change 
-    static final int MAX_N=1000;    //maximum no. of iterations
+    static int MAX_N=1000;    //maximum no. of iterations
 
     //panel
     Panel panel;
@@ -28,8 +31,26 @@ public class Julia extends JFrame{    //inherit JFrame
     public Julia(){
         setGUIprop();
         addPanel();
+        this.setC(-0.4,0.6);
         updateFractal();
-		this.setVisible(true);
+        this.setVisible(true);
+
+    }
+    public Julia(double c_r, double c_i){
+        setGUIprop();
+        addPanel();
+        this.setC(c_r, c_i);
+        updateFractal();
+        this.setVisible(true);
+
+    }
+    public Julia(double c_r, double c_i, int n){
+        setGUIprop();
+        addPanel();
+        this.setC(c_r, c_i);
+        this.setIterations(n);
+        updateFractal();
+        this.setVisible(true);
     }
 
 
@@ -46,14 +67,13 @@ public class Julia extends JFrame{    //inherit JFrame
     double img_n   = DEFAULT_IMG_N;
     double img_p   = DEFAULT_IMG_P;
 
-    double c_r = -0.8;
-    double c_i = +0.156;
+
     //---------------------------------------------------
     /*
     Main Window
     */
     public void setGUIprop(){
-        this.setTitle("Fractals");
+        this.setTitle("Fractals-Julia");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(WIDTH,HEIGHT);
         this.setResizable(false);
@@ -69,10 +89,20 @@ public class Julia extends JFrame{    //inherit JFrame
     }
 
     // -------------------------------------------------------------------
+// for c complex number
+private void setC(double r, double i){
+    this.c_r = r;
+    this.c_i = i;
+}
+
+// Set iterations
+private static void setIterations(int n){
+    MAX_N = n;
+}
     // return x coordinates
 	private double getX(double x) {
 		return (x/WIDTH)*(real_p-real_n) + real_n;
-	} 
+	}
 
     // return y coordinates
 	private double getY(double y) {

@@ -16,7 +16,7 @@ public class Fractal extends JFrame{    //inherit JFrame
     static final int HEIGHT=800;
 
     //may change 
-    static final int MAX_N=1000;    //maximum no. of iterations
+    static int MAX_N=1000;    //maximum no. of iterations
 
     //panel
     Panel panel;
@@ -142,15 +142,24 @@ public class Fractal extends JFrame{    //inherit JFrame
 	} // computeIterations
 // -------------------------------------------------------------------
     public static void main(String[] args) {
-        if (args[0].equals("Mandelbrot")) {
-            new Mandelbrot();  //creating a new instance of Fractal
-        }else if(args[0].equals("Julia")){
-            System.out.println("Julia");
-            new Julia();
-        }else {
-            System.out.println("Usage");
-        }
-
+        // try {
+            if (args[0].equals("Mandelbrot")) {
+                new Mandelbrot();  //creating a new instance of Fractal Mandelbrot
+            }else if(args[0].equals("Julia")){
+                switch (args.length) {
+                    case 4:
+                    new Julia(Double.parseDouble(args[1]), Double.parseDouble(args[2]), Integer.parseInt(args[3]));
+                        break;
+                    case 3:
+                        new Julia(Double.parseDouble(args[1]), Double.parseDouble(args[2]));
+                        break;
+                    case 1:
+                        new Julia();
+                        break;
+               }
+            }else {
+                System.out.println("Usage");
+            }
     }
 
 

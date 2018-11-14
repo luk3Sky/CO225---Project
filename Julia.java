@@ -1,7 +1,3 @@
-/*
-*
-*/
-
 import java.util.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -18,10 +14,10 @@ public class Julia extends JFrame{    //inherit JFrame
     //may change 
     static final int MAX_N=1000;    //maximum no. of iterations
 
+public class Julia extends Fractal{
     //panel
     Panel panel;
     BufferedImage fractalImage;
-
     /*
     constructor
     */
@@ -29,7 +25,7 @@ public class Julia extends JFrame{    //inherit JFrame
         setGUIprop();
         addPanel();
         updateFractal();
-		this.setVisible(true);
+		    this.setVisible(true);
     }
 
 
@@ -40,8 +36,8 @@ public class Julia extends JFrame{    //inherit JFrame
     static final double DEFAULT_IMG_N  = -1.0;
     static final double DEFAULT_IMG_P  = +1.0;
 	
-	//double zoomFactor = DEFAULT_ZOOM;
-	double real_p   = DEFAULT_REAL_P;
+	  //double zoomFactor = DEFAULT_ZOOM;
+	  double real_p   = DEFAULT_REAL_P;
     double real_n   = DEFAULT_REAL_N;
     double img_n   = DEFAULT_IMG_N;
     double img_p   = DEFAULT_IMG_P;
@@ -53,6 +49,30 @@ public class Julia extends JFrame{    //inherit JFrame
     Main Window
     */
     public void setGUIprop(){
+    
+    public Julia(){
+        this.setGUIprop();
+        this.addPanel();
+        this.updateFractal();
+		this.setVisible(true);
+    }
+
+    // -------------------------------------------------------------------
+    // return x coordinates
+	private double getX(double x) {
+		return (x/WIDTH)*(real_p-real_n) + real_n;
+	} 
+
+    // return y coordinates
+	private double getY(double y) {
+		return (y/HEIGHT)*(img_n-img_p) + img_p;
+	} 
+    // -------------------------------------------------------------------
+
+   /*
+    Main Window
+    */
+    private void setGUIprop(){
         this.setTitle("Fractals");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(WIDTH,HEIGHT);
@@ -104,7 +124,7 @@ public class Julia extends JFrame{    //inherit JFrame
 	private int makeColor( int iterCount ) {
         
         int color = 0b010001000010101000111000; 
-		int mask  = 0b000000000001000100010111;
+		    int mask  = 0b000000000001000100010111;
         int shiftMag = iterCount / 15;
 
 		if (iterCount == MAX_N) 
@@ -119,6 +139,34 @@ public class Julia extends JFrame{    //inherit JFrame
 
 	private int computeIterations(double z_r, double z_i) {
 
+//------------------------
+
+
+
+    private void updateFractal() {
+            
+        for (int x = 0; x < WIDTH; x++ ) {
+            for (int y = 0; y < HEIGHT; y++ ) {
+                
+                double c_r = getX(x);
+                double c_i = getY(y);
+                
+                int iterCount = computeIterations(c_r, c_i);
+                
+                int pixelColor = makeColor(iterCount);
+                fractalImage.setRGB(x, y, pixelColor);
+                
+            }
+        }
+        
+        panel.repaint();
+        
+    }
+
+	public int computeIterations(double c_r, double c_i) {
+
+		double z_r = 0.0;
+		double z_i = 0.0;
 		
 		int iterCount = 0;
 
@@ -141,10 +189,13 @@ public class Julia extends JFrame{    //inherit JFrame
 		return iterCount;
 		
 	} // computeIterations
+
 // -------------------------------------------------------------------
     public static void main(String[] args) {
         new Julia();  //creating a new instance of Fractal
     }
+
+
 
 
     private class Panel extends JPanel{    //inherit JPanel
@@ -160,3 +211,4 @@ public class Julia extends JFrame{    //inherit JFrame
         }
     }
 }
+

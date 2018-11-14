@@ -1,4 +1,7 @@
-<<<<<<< HEAD
+/*
+*
+*/
+
 import java.util.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -15,10 +18,10 @@ public class Julia extends JFrame{    //inherit JFrame
     //may change 
     static final int MAX_N=1000;    //maximum no. of iterations
 
-public class Julia extends Fractal{
     //panel
     Panel panel;
     BufferedImage fractalImage;
+
     /*
     constructor
     */
@@ -26,7 +29,7 @@ public class Julia extends Fractal{
         setGUIprop();
         addPanel();
         updateFractal();
-		    this.setVisible(true);
+		this.setVisible(true);
     }
 
 
@@ -37,8 +40,8 @@ public class Julia extends Fractal{
     static final double DEFAULT_IMG_N  = -1.0;
     static final double DEFAULT_IMG_P  = +1.0;
 	
-	  //double zoomFactor = DEFAULT_ZOOM;
-	  double real_p   = DEFAULT_REAL_P;
+	//double zoomFactor = DEFAULT_ZOOM;
+	double real_p   = DEFAULT_REAL_P;
     double real_n   = DEFAULT_REAL_N;
     double img_n   = DEFAULT_IMG_N;
     double img_p   = DEFAULT_IMG_P;
@@ -50,40 +53,21 @@ public class Julia extends Fractal{
     Main Window
     */
     public void setGUIprop(){
-    
-    public Julia(){
-        this.setGUIprop();
-        this.addPanel();
-        this.updateFractal();
-		this.setVisible(true);
+        this.setTitle("Fractals");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(WIDTH,HEIGHT);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
-=======
-public class Julia extends Fractal{
->>>>>>> parent of 2782943... Changed properly
 
-    static double c_r = 3;
-    static double c_i = 4;
-    public void updateFractal() {
+    public void addPanel(){
+        panel = new Panel();
+        fractalImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+        panel.setVisible(true);
+        this.add(panel,BorderLayout.CENTER);
+    }
 
-
-		for (int x = 0; x < WIDTH; x++ ) {
-			for (int y = 0; y < HEIGHT; y++ ) {
-
-                double z_r = getXPos(x);
-                double z_i = getYPos(y);
-				int iterCount = computeIterations_2(z_r, z_i);
-				
-				int pixelColor = makeColor(iterCount);
-				fractalImage.setRGB(x, y, pixelColor);
-				
-			}
-		}
-		
-		panel.repaint();
-		
-    } // updateFractal
-
-<<<<<<< HEAD
     // -------------------------------------------------------------------
     // return x coordinates
 	private double getX(double x) {
@@ -120,7 +104,7 @@ public class Julia extends Fractal{
 	private int makeColor( int iterCount ) {
         
         int color = 0b010001000010101000111000; 
-		    int mask  = 0b000000000001000100010111;
+		int mask  = 0b000000000001000100010111;
         int shiftMag = iterCount / 15;
 
 		if (iterCount == MAX_N) 
@@ -135,57 +119,6 @@ public class Julia extends Fractal{
 
 	private int computeIterations(double z_r, double z_i) {
 
-//------------------------
-=======
-    private int computeIterations(double z_r, double z_i) {
-            
-        /*
-        
-        Let c = c_r + c_i
-        Let z = z_r + z_i
-        
-        z' = z*z + c
-        = (z_r + z_i)(z_r + z_i) + (c_r + c_i)
-        = z_r² + 2*z_r*z_i - z_i² + c_r + c_i
->>>>>>> parent of 2782943... Changed properly
-
-            z_r' = z_r² - z_i² + c_r
-            z_i' = 2*z_i*z_r + c_i
-            
-        */
-
-        // double z_r = 0.0;
-        // double z_i = 0.0;
-        
-        int iterCount = 0;
-
-        // Modulus (distance) formula:
-        // √(a² + b²) <= 2.0
-        // a² + b² <= 4.0
-        while ( z_r*z_r + z_i*z_i <= 4.0 ) {
-            
-            double z_r_tmp = z_r;
-            
-            z_r = z_r*z_r - z_i*z_i + c_r;
-            z_i = 2*z_i*z_r_tmp + c_i;
-            // System.out.println("Inside");
-            // Point was inside the Mandelbrot set
-            if (iterCount >= MAX_N) 
-                return MAX_N;
-            
-            iterCount++;
-            
-        }
-        
-        // Complex point was outside Mandelbrot set
-        
-<<<<<<< HEAD
-    }
-
-	public int computeIterations(double c_r, double c_i) {
-
-		double z_r = 0.0;
-		double z_i = 0.0;
 		
 		int iterCount = 0;
 
@@ -208,21 +141,12 @@ public class Julia extends Fractal{
 		return iterCount;
 		
 	} // computeIterations
-
 // -------------------------------------------------------------------
     public static void main(String[] args) {
         new Julia();  //creating a new instance of Fractal
     }
 
 
-
-
-=======
-        // System.out.println("Outside");
-        return iterCount;
-        
-    } // computeIterations
->>>>>>> parent of 2782943... Changed properly
     private class Panel extends JPanel{    //inherit JPanel
 
         @Override
@@ -236,4 +160,3 @@ public class Julia extends Fractal{
         }
     }
 }
-

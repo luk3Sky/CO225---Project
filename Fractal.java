@@ -146,7 +146,7 @@ public class Fractal extends JFrame{    //inherit JFrame
             new Mandelbrot();  //creating a new instance of Fractal
         }else if(args[0].equals("Julia")){
             System.out.println("Julia");
-            // new Julia();
+            new Julia();
         }else {
             System.out.println("Usage");
         }

@@ -66,28 +66,24 @@ public class Fractal extends JFrame{    //inherit JFrame
     }
 
     // -------------------------------------------------------------------
-	private double getXPos(double x) {
+    // return x coordinates
+	private double getX(double x) {
 		return (x/WIDTH)*(real_p-real_n) + real_n;
-	} // getXPos
-// -------------------------------------------------------------------
-	private double getYPos(double y) {
-		return (y/HEIGHT)*(img_n-img_p) + img_p;
-	} // getYPos
-// -------------------------------------------------------------------
+	} 
 
-	/**
-	 * Updates the fractal by computing the number of iterations
-	 * for each point in the fractal and changing the color
-	 * based on that.
-	 **/
-	
+    // return y coordinates
+	private double getY(double y) {
+		return (y/HEIGHT)*(img_n-img_p) + img_p;
+	} 
+    // -------------------------------------------------------------------
+
 	public void updateFractal() {
 		
 		for (int x = 0; x < WIDTH; x++ ) {
 			for (int y = 0; y < HEIGHT; y++ ) {
 				
-				double c_r = getXPos(x);
-				double c_i = getYPos(y);
+				double c_r = getX(x);
+				double c_i = getY(y);
 				
 				int iterCount = computeIterations(c_r, c_i);
 				
@@ -99,46 +95,32 @@ public class Fractal extends JFrame{    //inherit JFrame
 		
 		panel.repaint();
 		
-    } // updateFractal
+    }
     
-    // -------------------------------------------------------------------	
-	/** Returns a posterized color based off of the iteration count
-	    of a given point in the fractal **/
+    // -------------------------------------------------------------------	coloring method
 	private int makeColor( int iterCount ) {
-		
+        
+        int color = 0b000101110101011000011100; 
+		int mask  = 0b000000000000101100110101;
+        int shiftMag = iterCount / 3;
+
 		if (iterCount == MAX_N) 
 			return Color.BLACK.getRGB();
 		
-		return Color.BLUE.getRGB();
 		
-	} // makeColor
+        
+        return color | (mask << shiftMag);
+	} 
 
 // -------------------------------------------------------------------
 
 	private int computeIterations(double c_r, double c_i) {
-		
-		/*
-		
-		Let c = c_r + c_i
-		Let z = z_r + z_i
-		
-		z' = z*z + c
-		   = (z_r + z_i)(z_r + z_i) + (c_r + c_i)
-		   = z_r² + 2*z_r*z_i - z_i² + c_r + c_i
-
-		     z_r' = z_r² - z_i² + c_r
-		     z_i' = 2*z_i*z_r + c_i
-		     
-		*/
 
 		double z_r = 0.0;
 		double z_i = 0.0;
 		
 		int iterCount = 0;
 
-		// Modulus (distance) formula:
-		// √(a² + b²) <= 2.0
-		// a² + b² <= 4.0
 		while ( z_r*z_r + z_i*z_i <= 4.0 ) {
 			
 			double z_r_tmp = z_r;

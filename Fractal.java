@@ -34,13 +34,17 @@ public class Fractal extends JFrame{    //inherit JFrame
 
 
     //may change---------------------------------------
-    static final double DEFAULT_ZOOM       = 100.0;
-	static final double DEFAULT_TOP_LEFT_X = -2.0;
-	static final double DEFAULT_TOP_LEFT_Y = +2.0;
+    //static final double DEFAULT_ZOOM       = 800.0;
+    static final double DEFAULT_REAL_N = -1.0;
+    static final double DEFAULT_REAL_P = +1.0;
+    static final double DEFAULT_IMG_N  = -1.0;
+    static final double DEFAULT_IMG_P  = +1.0;
 	
-	double zoomFactor = DEFAULT_ZOOM;
-	double topLeftX   = DEFAULT_TOP_LEFT_X;
-    double topLeftY   = DEFAULT_TOP_LEFT_Y;
+	//double zoomFactor = DEFAULT_ZOOM;
+	double real_p   = DEFAULT_REAL_P;
+    double real_n   = DEFAULT_REAL_N;
+    double img_n   = DEFAULT_IMG_N;
+    double img_p   = DEFAULT_IMG_P;
     //---------------------------------------------------
     /*
     Main Window
@@ -63,11 +67,11 @@ public class Fractal extends JFrame{    //inherit JFrame
 
     // -------------------------------------------------------------------
 	private double getXPos(double x) {
-		return x/zoomFactor + topLeftX;
+		return (x/WIDTH)*(real_p-real_n) + real_n;
 	} // getXPos
 // -------------------------------------------------------------------
 	private double getYPos(double y) {
-		return y/zoomFactor - topLeftY;
+		return (y/HEIGHT)*(img_n-img_p) + img_p;
 	} // getYPos
 // -------------------------------------------------------------------
 

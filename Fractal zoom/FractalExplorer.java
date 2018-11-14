@@ -25,10 +25,6 @@ public class FractalExplorer extends JFrame{    //inherit JFrame
     //may change 
     static final int MAX_N=1000;    //maximum no. of iterations
 
-    //panel
-    Panel panel;
-    BufferedImage fractalImage;
-
     /*
     constructor
     */
@@ -73,11 +69,11 @@ public class FractalExplorer extends JFrame{    //inherit JFrame
     }
 
     // -------------------------------------------------------------------
-	private double getXPos(double x) {
+	public double getXPos(double x) {
 		return (x/WIDTH)*(real_p-real_n) + real_n;
 	} // getXPos
 // -------------------------------------------------------------------
-	private double getYPos(double y) {
+	public double getYPos(double y) {
 		return (y/HEIGHT)*(img_n-img_p) + img_p;
 	} // getYPos
 // -------------------------------------------------------------------

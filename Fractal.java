@@ -15,8 +15,12 @@ public class Fractal extends JFrame{    //inherit JFrame
     static final int WIDTH=800;
     static final int HEIGHT=800;
 
+    static final int MAX_N=1000;    //maximum no. of iterations
 
-
+    //panel
+    Panel panel;
+    BufferedImage fractalImage;
+    
     /*
     constructor
     */
@@ -25,6 +29,15 @@ public class Fractal extends JFrame{    //inherit JFrame
         addPanel();
     }
 
+    static final double DEFAULT_ZOOM       = 100.0;
+	static final double DEFAULT_TOP_LEFT_X = -3.0;
+	static final double DEFAULT_TOP_LEFT_Y = +3.0;
+	
+	double zoomFactor = DEFAULT_ZOOM;
+	double topLeftX   = DEFAULT_TOP_LEFT_X;
+    double topLeftY   = DEFAULT_TOP_LEFT_Y;
+
+
     public void addPanel(){
         panel = new Panel();
         fractalImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -32,7 +45,9 @@ public class Fractal extends JFrame{    //inherit JFrame
         panel.setVisible(true);
     }
 
-
+    /*
+    Main Window
+    */
     public void setGUIprop(){
         this.setTitle("Fractals");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,12 +56,6 @@ public class Fractal extends JFrame{    //inherit JFrame
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
-    /*
-    canvas
-    */
-    Panel panel;
-    BufferedImage fractalImage;
 
 
     public static void main(String[] args) {
@@ -62,8 +71,8 @@ public class Fractal extends JFrame{    //inherit JFrame
         }
 
         @Override
-        public void paintComponent(Graphics obj){
-            obj.drawImage(fractalImage, 0, 0, null);
+        public void paintComponent(Graphics g){
+            g.drawImage(fractalImage, 0, 0, null);
         }
     }
 }

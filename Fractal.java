@@ -142,7 +142,15 @@ public class Fractal extends JFrame{    //inherit JFrame
 	} // computeIterations
 // -------------------------------------------------------------------
     public static void main(String[] args) {
-        new Fractal();  //creating a new instance of Fractal
+        if (args[0].equals("Mandelbrot")) {
+            new Mandelbrot();  //creating a new instance of Fractal
+        }else if(args[0].equals("Julia")){
+            System.out.println("Julia");
+            // new Julia();
+        }else {
+            System.out.println("Usage");
+        }
+
     }
 
 

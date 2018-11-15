@@ -8,30 +8,22 @@ import java.awt.image.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Julia extends JFrame{    //inherit JFrame
+public class Julia extends Fractal{    //inherit JFrame
     /*
     global variables for frame size
     */
-    static final int WIDTH=800;
-    static final int HEIGHT=800;
+    // static final int WIDTH=800;
+    // static final int HEIGHT=800;
     
     public double c_r;
     public double c_i;
     
-    //may change 
-    static int MAX_N=1000;    //maximum no. of iterations
-
-    //panel
-    Panel panel;
-    BufferedImage fractalImage;
-
-    /*
-    constructor
-    */
+// -------------------------------------------------------------------
+//constructors with different signatures
     public Julia(){
         setGUIprop();
         addPanel();
-        this.setC(-0.4,0.6);
+        setC(-0.4,0.6);
         updateFractal();
         this.setVisible(true);
 
@@ -39,7 +31,7 @@ public class Julia extends JFrame{    //inherit JFrame
     public Julia(double c_r, double c_i){
         setGUIprop();
         addPanel();
-        this.setC(c_r, c_i);
+        setC(c_r, c_i);
         updateFractal();
         this.setVisible(true);
 
@@ -47,68 +39,26 @@ public class Julia extends JFrame{    //inherit JFrame
     public Julia(double c_r, double c_i, int n){
         setGUIprop();
         addPanel();
-        this.setC(c_r, c_i);
-        this.setIterations(n);
+        setC(c_r, c_i);
+        setIterations(n);
         updateFractal();
         this.setVisible(true);
     }
 
+// -------------------------------------------------------------------
 
-    //may change---------------------------------------
-    //static final double DEFAULT_ZOOM       = 800.0;
-    static final double DEFAULT_REAL_N = -1.0;
-    static final double DEFAULT_REAL_P = +1.0;
-    static final double DEFAULT_IMG_N  = -1.0;
-    static final double DEFAULT_IMG_P  = +1.0;
-	
-	//double zoomFactor = DEFAULT_ZOOM;
-	double real_p   = DEFAULT_REAL_P;
-    double real_n   = DEFAULT_REAL_N;
-    double img_n   = DEFAULT_IMG_N;
-    double img_p   = DEFAULT_IMG_P;
-
-
-    //---------------------------------------------------
-    /*
-    Main Window
-    */
-    public void setGUIprop(){
-        this.setTitle("Fractals-Julia");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(WIDTH,HEIGHT);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+    // for c complex number
+    private void setC(double r, double i){
+        this.c_r = r;
+        this.c_i = i;
     }
 
-    public void addPanel(){
-        panel = new Panel();
-        fractalImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-        panel.setVisible(true);
-        this.add(panel,BorderLayout.CENTER);
+    // Set iterations
+    private static void setIterations(int n){
+        MAX_N = n;
     }
 
-    // -------------------------------------------------------------------
-// for c complex number
-private void setC(double r, double i){
-    this.c_r = r;
-    this.c_i = i;
-}
-
-// Set iterations
-private static void setIterations(int n){
-    MAX_N = n;
-}
-    // return x coordinates
-	private double getX(double x) {
-		return (x/WIDTH)*(real_p-real_n) + real_n;
-	}
-
-    // return y coordinates
-	private double getY(double y) {
-		return (y/HEIGHT)*(img_n-img_p) + img_p;
-	} 
-    // -------------------------------------------------------------------
+// -------------------------------------------------------------------
 
 	public void updateFractal() {
 		
@@ -130,7 +80,7 @@ private static void setIterations(int n){
 		
     }
     
-    // -------------------------------------------------------------------	coloring method
+// -------------------------------------------------------------------	coloring method
 	private int makeColor( int iterCount ) {
         
         int color = 0b010001000010101000111000; 
@@ -171,22 +121,4 @@ private static void setIterations(int n){
 		return iterCount;
 		
 	} // computeIterations
-// -------------------------------------------------------------------
-    public static void main(String[] args) {
-        new Julia();  //creating a new instance of Fractal
-    }
-
-
-    private class Panel extends JPanel{    //inherit JPanel
-
-        @Override
-        public Dimension getPreferredSize(){    //Dimension class encapsulates the width and height of a component (in integer precision) in a single object
-            return new Dimension(WIDTH,HEIGHT);
-        }
-
-        @Override
-        public void paintComponent(Graphics g){
-            g.drawImage(fractalImage, 0, 0, null);
-        }
-    }
 }

@@ -1,5 +1,7 @@
 /*
-*
+* CO225 - Software Construction
+* E/15/142 - Jayalath A.H.G.D.
+* E/15/154 - Jayasooriya J.K.C.N.
 */
 
 import java.util.*;
@@ -22,18 +24,6 @@ public class Fractal extends JFrame{    //inherit JFrame
     Panel panel;
     BufferedImage fractalImage;
 
-    /*
-    constructor
-    */
-    // public Fractal(){
-    //     setGUIprop();
-    //     addPanel();
-    //     updateFractal();
-	// 	this.setVisible(true);
-    // }
-
-
-    //may change---------------------------------------
     //static final double DEFAULT_ZOOM       = 800.0;
     static protected double DEFAULT_REAL_N = -1.0;
     static protected double DEFAULT_REAL_P = +1.0;
@@ -50,7 +40,7 @@ public class Fractal extends JFrame{    //inherit JFrame
     Main Window
     */
     public void setGUIprop(){
-        this.setTitle("Fractals");
+        this.setTitle("Fractal");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(WIDTH,HEIGHT);
         this.setResizable(false);
@@ -75,7 +65,6 @@ public class Fractal extends JFrame{    //inherit JFrame
 	public double getY(double y) {
 		return (y/HEIGHT)*(img_n-img_p) + img_p;
 	}
-// -------------------------------------------------------------------
 
 	
 // -------------------------------------------------------------------

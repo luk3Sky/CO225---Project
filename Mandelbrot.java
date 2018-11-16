@@ -1,5 +1,7 @@
 /*
-*
+* CO225 - Software Construction
+* E/15/142 - Jayalath A.H.G.D.
+* E/15/154 - Jayasooriya J.K.C.N.
 */
 
 import java.util.*;
@@ -35,9 +37,7 @@ public class Mandelbrot extends Fractal{
         setRealRegion(real_r, real_i);
         setImagRegion(imag_r, imag_i);
         setIterations(n);
-
         updateFractal();
-        System.out.println("True");
         this.setVisible(true);
     }
 

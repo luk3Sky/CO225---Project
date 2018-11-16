@@ -1,5 +1,7 @@
 /*
-*
+* CO225 - Software Construction
+* E/15/142 - Jayalath A.H.G.D.
+* E/15/154 - Jayasooriya J.K.C.N.
 */
 
 import java.util.*;
@@ -9,11 +11,6 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Julia extends Fractal{    //inherit JFrame
-    /*
-    global variables for frame size
-    */
-    // static final int WIDTH=800;
-    // static final int HEIGHT=800;
     
     public double c_r;
     public double c_i;

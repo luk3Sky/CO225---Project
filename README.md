@@ -9,3 +9,11 @@ The software is written on java purely
 ### Includes:
 - AWT - Java abstract window toolkit
 - Math library for complex numbers
+
+### Usage:
+```bash
+$ Java Fractal <Mandelbrot>
+$ Java Fractal <Mandelbrot> <real range> <complex range> <scale factor>
+$ Java Fractal <Julia>
+$ Java Fractal <Julia> <real part of c> <complex part of c> <scale factor>
+```
